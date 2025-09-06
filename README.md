@@ -120,6 +120,18 @@ Replace placeholder images with your actual images:
 - Project screenshots in Projects section
 - Add your resume PDF to the public folder
 
+### Favicon
+
+The portfolio includes a custom "S" favicon:
+- **SVG Favicon**: `public/favicon.svg` (modern browsers)
+- **ICO Favicon**: `public/favicon.ico` (legacy browsers)
+- **Apple Touch Icon**: `public/apple-touch-icon.png` (iOS devices)
+
+To create your own favicon:
+1. Design a 32x32px icon with your initials or logo
+2. Convert to multiple formats (SVG, ICO, PNG)
+3. Replace the files in the `public` folder
+
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
