@@ -64,16 +64,14 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover ${
-                project.featured ? 'lg:col-span-2' : ''
-              }`}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover"
             >
               {/* Project Image */}
               <div className="relative h-48 md:h-56 overflow-hidden">
