@@ -21,10 +21,10 @@ const Projects = () => {
     {
       title: "FixIT – Smart Internal Issue Resolver",
       description: "Addressed internal support delays by allowing employees to log technical issues and automatically get matched to the most suitable colleague based on skills, history, and availability. Improved organizational efficiency by decentralizing IT support, reducing dependency on a central helpdesk, and enabling faster, peer-driven issue resolution through a secure web platform.",
-      image: "/api/placeholder/400/300",
+      image: "/projects/fixit.png",
       tech: ["React.js", "Node.js", "Express", "MongoDB", "JWT Auth", "AI Matching"],
       github: "https://github.com/Saravananms7/FixIT",
-      live: "https://fixit-demo.com",
+      live: "https://fix-it-frontend.vercel.app/",
       featured: true
     },
     {
@@ -39,7 +39,7 @@ const Projects = () => {
     {
       title: "College Marketplace",
       description: "Built a full-stack web platform enabling college students to buy, sell, and trade second-hand items like books, electronics, and furniture within their campus. Implemented secure user authentication, product listing features, wishlist functionality, and advanced search filters to enhance discoverability and trust. Promoted a sustainable and affordable campus ecosystem by encouraging reuse and peer-to-peer transactions in a verified student community.",
-      image: "/api/placeholder/400/300",
+      image: "/projects/marketplace.jpg",
       tech: ["MERN Stack", "User Authentication", "Search Filters", "Community Platform"],
       github: "https://github.com/Saravananms7/College-Marketplace",
       live: "https://college-marketplace-demo.com",
@@ -77,7 +77,20 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div className="relative h-48 md:h-56 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 flex items-center justify-center">
+                {project.image && !project.image.startsWith('/api/placeholder') ? (
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                      const fallback = e.currentTarget.nextElementSibling
+                      if (fallback) fallback.classList.remove('hidden')
+                    }}
+                  />
+                ) : null}
+
+                <div className={`${project.image && !project.image.startsWith('/api/placeholder') ? 'hidden' : ''} w-full h-full bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 flex items-center justify-center`}>
                   <span className="text-4xl font-bold text-primary-600 dark:text-primary-400">
                     {project.title.charAt(0)}
                   </span>
