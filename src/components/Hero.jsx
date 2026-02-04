@@ -22,7 +22,7 @@ const Hero = () => {
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
-      
+
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -68,7 +68,7 @@ const Hero = () => {
               Hi, I'm{' '}
               <span className="gradient-text">Saravanan</span>
             </motion.h1>
-            
+
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ const Hero = () => {
             >
               Aspiring Software Developer
             </motion.h2>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -103,7 +103,7 @@ const Hero = () => {
               <Download className="w-5 h-5" />
               Download Resume
             </motion.button>
-            
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

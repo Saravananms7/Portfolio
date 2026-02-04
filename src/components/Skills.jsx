@@ -90,7 +90,7 @@ const Skills = () => {
 
 
   return (
-    <section id="skills" ref={ref} className="section-padding bg-gray-50 dark:bg-gray-800">
+    <section id="skills" ref={ref} className="section-padding bg-transparent">
       <div className="container-max">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -114,16 +114,16 @@ const Skills = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: 0.2 + categoryIndex * 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               {/* Category Header */}
               <div className="flex items-center mb-6">
                 <div className="text-3xl mr-3">{category.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-bold text-white">
                   {category.title}
                 </h3>
               </div>
-              
+
               {/* Technology Badges */}
               <div className="flex flex-wrap gap-3">
                 {category.technologies.map((tech, techIndex) => (
@@ -151,13 +151,13 @@ const Skills = () => {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="text-center mt-12"
         >
-          <div className="bg-white dark:bg-gray-700 rounded-xl p-8 shadow-lg max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-xl p-8 shadow-lg max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-4">
               Always Learning
             </h3>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              I'm passionate about staying up-to-date with the latest technologies and best practices. 
-              I'm currently exploring advanced React patterns, cloud architecture, and machine learning applications. 
+              I'm passionate about staying up-to-date with the latest technologies and best practices.
+              I'm currently exploring advanced React patterns, cloud architecture, and machine learning applications.
               I believe in continuous learning and always look for opportunities to expand my skill set.
             </p>
           </div>

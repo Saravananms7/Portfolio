@@ -102,8 +102,8 @@ const Contact = () => {
                 Let's Connect
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                I'm always interested in new opportunities and exciting projects. 
-                Whether you have a question, want to collaborate, or just want to say hi, 
+                I'm always interested in new opportunities and exciting projects.
+                Whether you have a question, want to collaborate, or just want to say hi,
                 feel free to reach out!
               </p>
             </div>
@@ -117,7 +117,7 @@ const Contact = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   href={info.link}
-                  className="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
+                  className="flex items-center p-4 bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
                 >
                   <div className="p-3 bg-primary-100 dark:bg-primary-900 rounded-lg group-hover:bg-primary-200 dark:group-hover:bg-primary-800 transition-colors duration-200">
                     <info.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -165,12 +165,12 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg"
+            className="bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-xl p-8 shadow-lg"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Send a Message
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -184,7 +184,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                    className="w-full px-4 py-3 border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-slate-950/50 text-white transition-colors duration-200"
                     placeholder="Your Name"
                   />
                 </div>
@@ -200,11 +200,11 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
-                    placeholder="your@email.com"
+                    placeholder="saravanansworkspace@gmail.com"
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Subject
@@ -220,7 +220,7 @@ const Contact = () => {
                   placeholder="What's this about?"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Message
@@ -236,7 +236,7 @@ const Contact = () => {
                   placeholder="Tell me about your project or just say hello!"
                 />
               </div>
-              
+
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

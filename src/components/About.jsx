@@ -8,7 +8,7 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="about" ref={ref} className="section-padding bg-gray-50 dark:bg-gray-800">
+    <section id="about" ref={ref} className="section-padding bg-transparent">
       <div className="container-max">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -36,9 +36,9 @@ const About = () => {
               <div className="w-80 h-80 rounded-full bg-gradient-to-br from-primary-400 to-purple-500 p-1">
                 <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
                   {/* Profile image */}
-                  <img 
-                    src="/profile-image.jpg" 
-                    alt="Saravanan Profile Picture" 
+                  <img
+                    src="/profile-image.jpg"
+                    alt="Saravanan Profile Picture"
                     className="w-full h-full object-cover rounded-full"
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -52,7 +52,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Floating elements */}
               <motion.div
                 animate={{ rotate: 360 }}
@@ -74,24 +74,24 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-6"
           >
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h3 className="text-3xl font-bold text-white">
               Passionate Developer & Problem Solver
             </h3>
-            
+
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              I'm an aspiring software developer with a passion for creating innovative solutions 
-              that make a real impact. My journey in technology began with curiosity and has evolved 
+              I'm an aspiring software developer with a passion for creating innovative solutions
+              that make a real impact. My journey in technology began with curiosity and has evolved
               into a deep love for building applications that solve real-world problems.
             </p>
-            
+
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              I specialize in modern web technologies and mobile development, with experience in 
-              React, Flutter, and various backend technologies. I believe in writing clean, 
+              I specialize in modern web technologies and mobile development, with experience in
+              React, Flutter, and various backend technologies. I believe in writing clean,
               maintainable code and always strive to learn new technologies and best practices.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-6">
-              <div className="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md">
+              <div className="text-center p-4 bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-lg shadow-md">
                 <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">5+</div>
                 <div className="text-sm text-gray-600 dark:text-gray-300">Years Learning</div>
               </div>

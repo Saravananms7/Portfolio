@@ -42,7 +42,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white">
+    <footer className="bg-transparent text-white">
       <div className="container-max">
         <div className="py-12">
           <div className="grid md:grid-cols-3 gap-8">
@@ -58,7 +58,7 @@ const Footer = () => {
                 Saravanan
               </h3>
               <p className="text-gray-300 leading-relaxed">
-                Aspiring Software Developer passionate about creating innovative solutions 
+                Aspiring Software Developer passionate about creating innovative solutions
                 that make a real impact. Turning ideas into reality, one line of code at a time.
               </p>
               <div className="flex space-x-4">
@@ -160,7 +160,7 @@ const Footer = () => {
               </motion.div>
               <span>and React</span>
             </div>
-            
+
             <div className="text-gray-400 text-sm">
               Last updated: {new Date().toLocaleDateString()}
             </div>

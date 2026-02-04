@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Home, User, Briefcase, Code, Award, Mail } from 'lucide-react'
+import { ExpandableTabs } from './ui/expandable-tabs'
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -36,66 +37,42 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300"
     >
-      <div className="container-max">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text"
-          >
-            Saravanan
-          </motion.div>
+      <div className="container-max h-full">
+        <div className="flex items-center justify-between h-16 relative">
+          <div></div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.name}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection(item.href)}
-                className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 font-medium"
-              >
-                {item.name}
-              </motion.button>
-            ))}
-            
-            {/* Dark Mode Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-            >
-              {darkMode ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
-              ) : (
-                <Moon className="w-5 h-5 text-gray-600" />
-              )}
-            </motion.button>
+
+          {/* Center Navigation - Dynamic Island Style */}
+          <div className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <ExpandableTabs
+              className="rounded-full px-2 py-1.5 border border-white/10 bg-slate-900/80 backdrop-blur-md shadow-lg"
+              activeColor="text-primary-600 dark:text-primary-400"
+              tabs={[
+                { title: 'Home', icon: Home },
+                { title: 'About', icon: User },
+                { title: 'Projects', icon: Briefcase },
+                { title: 'Skills', icon: Code },
+                { title: 'Certifications', icon: Award },
+                { type: 'separator' },
+                { title: 'Contact', icon: Mail },
+              ]}
+              onChange={(index) => {
+                if (index === null) return;
+                const hrefs = ['#home', '#about', '#projects', '#skills', '#certifications', null, '#contact'];
+                const href = hrefs[index];
+                if (href) scrollToSection(href);
+              }}
+            />
+          </div>
+
+          {/* Right Actions */}
+          <div className="hidden md:flex items-center space-x-4">
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-            >
-              {darkMode ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
-              ) : (
-                <Moon className="w-5 h-5 text-gray-600" />
-              )}
-            </motion.button>
-            
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
