@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import ExpandOnHover from './ui/expand-cards'
 
 const Skills = () => {
   const ref = useRef(null)
@@ -106,43 +107,15 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* Skills Grid - Card Based Design */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.8, delay: 0.2 + categoryIndex * 0.2 }}
-              className="bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              {/* Category Header */}
-              <div className="flex items-center mb-6">
-                <div className="text-3xl mr-3">{category.icon}</div>
-                <h3 className="text-xl font-bold text-white">
-                  {category.title}
-                </h3>
-              </div>
-
-              {/* Technology Badges */}
-              <div className="flex flex-wrap gap-3">
-                {category.technologies.map((tech, techIndex) => (
-                  <motion.div
-                    key={tech.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 + categoryIndex * 0.2 + techIndex * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className={`${tech.color} px-4 py-2 rounded-lg flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200`}
-                  >
-                    <span className="text-lg">{tech.icon}</span>
-                    <span className="text-sm font-medium">{tech.name}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Skills Expandable Layout */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-8 mb-16"
+        >
+          <ExpandOnHover skills={skillCategories} />
+        </motion.div>
 
         {/* Additional Info */}
         <motion.div
