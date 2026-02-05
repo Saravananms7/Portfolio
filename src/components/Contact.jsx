@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { Mail, Linkedin, Github, MapPin, Phone, Send } from 'lucide-react'
+import { Mail, Linkedin, Github, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const ref = useRef(null)
+  const formRef = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   })
+
+  const [status, setStatus] = useState('idle') // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e) => {
     setFormData({
@@ -23,11 +28,34 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    alert('Thank you for your message! I\'ll get back to you soon.')
+    setStatus('loading')
+
+    // REPLACE THESE WITH YOUR ACTUAL EMAILJS SERVICE ID, TEMPLATE ID, AND PUBLIC KEY
+    // Sign up at https://www.emailjs.com/
+    const serviceID = 'YOUR_SERVICE_ID'
+    const templateID = 'YOUR_TEMPLATE_ID'
+    const publicKey = 'YOUR_PUBLIC_KEY'
+
+    if (serviceID === 'YOUR_SERVICE_ID') {
+      setTimeout(() => {
+        setStatus('error')
+        setErrorMessage('EmailJS is not configured. Please set your Service ID, Template ID, and Public Key in Contact.jsx.')
+      }, 1000)
+      return
+    }
+
+    emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
+      .then((result) => {
+        console.log(result.text)
+        setStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => setStatus('idle'), 5000)
+      }, (error) => {
+        console.log(error.text)
+        setStatus('error')
+        setErrorMessage('Something went wrong. Please try again later.')
+        setTimeout(() => setStatus('idle'), 5000)
+      })
   }
 
   const contactInfo = [
@@ -165,13 +193,13 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-xl p-8 shadow-lg"
+            className="bg-slate-900/50 border border-slate-800 backdrop-blur-sm rounded-xl p-8 shadow-lg relative overflow-hidden"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Send a Message
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -184,7 +212,8 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-slate-950/50 text-white transition-colors duration-200"
+                    disabled={status === 'loading'}
+                    className="w-full px-4 py-3 border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-slate-950/50 text-white transition-colors duration-200 disabled:opacity-50"
                     placeholder="Your Name"
                   />
                 </div>
@@ -199,7 +228,8 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                    disabled={status === 'loading'}
+                    className="w-full px-4 py-3 border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-slate-950/50 text-white transition-colors duration-200 disabled:opacity-50"
                     placeholder="saravanansworkspace@gmail.com"
                   />
                 </div>
@@ -216,7 +246,8 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                  disabled={status === 'loading'}
+                  className="w-full px-4 py-3 border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-slate-950/50 text-white transition-colors duration-200 disabled:opacity-50"
                   placeholder="What's this about?"
                 />
               </div>
@@ -232,7 +263,8 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200 resize-none"
+                  disabled={status === 'loading'}
+                  className="w-full px-4 py-3 border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-slate-950/50 text-white transition-colors duration-200 resize-none disabled:opacity-50"
                   placeholder="Tell me about your project or just say hello!"
                 />
               </div>
@@ -241,11 +273,41 @@ const Contact = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                disabled={status === 'loading'}
+                className={`w-full px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl
+                    ${status === 'success'
+                    ? 'bg-green-600 hover:bg-green-700 text-white'
+                    : status === 'error'
+                      ? 'bg-red-600 hover:bg-red-700 text-white'
+                      : 'bg-primary-600 hover:bg-primary-700 text-white'
+                  } disabled:opacity-70 disabled:cursor-not-allowed`}
               >
-                <Send className="w-5 h-5" />
-                Send Message
+                {status === 'loading' ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : status === 'success' ? (
+                  <>
+                    <CheckCircle className="w-5 h-5" />
+                    Message Sent!
+                  </>
+                ) : status === 'error' ? (
+                  <>
+                    <AlertCircle className="w-5 h-5" />
+                    Failed to Send
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Send Message
+                  </>
+                )}
               </motion.button>
+
+              {status === 'error' && (
+                <p className="text-red-400 text-sm text-center mt-2">{errorMessage}</p>
+              )}
             </form>
           </motion.div>
         </div>
