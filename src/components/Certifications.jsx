@@ -77,7 +77,7 @@ const Certifications = () => {
       {/* Overlay Title */}
       <div className="absolute top-10 left-0 right-0 z-20 text-center pointer-events-none">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Certifications</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Certifications</span>
         </h2>
       </div>
 

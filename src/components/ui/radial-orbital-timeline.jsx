@@ -99,9 +99,28 @@ export default function RadialOrbitalTimeline({
         setRotationAngle(270 - targetAngle);
     };
 
+    // Responsive Radius State
+    const [radius, setRadius] = useState(200);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 640) {
+                setRadius(140);
+            } else {
+                setRadius(200);
+            }
+        };
+
+        // Initial set
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const calculateNodePosition = (index, total) => {
         const angle = ((index / total) * 360 + rotationAngle) % 360;
-        const radius = 200;
+        // Radius is now state-driven
         const radian = (angle * Math.PI) / 180;
 
         const x = radius * Math.cos(radian) + centerOffset.x;
@@ -187,7 +206,7 @@ export default function RadialOrbitalTimeline({
                         transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
                     }}
                 >
-                    <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 via-blue-500 to-teal-500 animate-pulse flex items-center justify-center z-10">
+                    <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-500 animate-pulse flex items-center justify-center z-10">
                         <div className="absolute w-20 h-20 rounded-full border border-white/20 animate-ping opacity-70"></div>
                         <div
                             className="absolute w-24 h-24 rounded-full border border-white/10 animate-ping opacity-50"
@@ -304,7 +323,7 @@ export default function RadialOrbitalTimeline({
                                                 </div>
                                                 <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
                                                     <div
-                                                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                                                        className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
                                                         style={{ width: `${item.energy}%` }}
                                                     ></div>
                                                 </div>
